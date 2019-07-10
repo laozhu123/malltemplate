@@ -1,16 +1,16 @@
 <view class="container">
-	<view class="userinfo">
-		<image wx:if="{{userInfo && userInfo.avatarUrl}}" class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"></image>
-		<text class="userinfo-nickname">{{ userInfo.nickName }}</text>
-	</view>
+  <view class="userinfo">
+    <image wx:if="{{userInfo && userInfo.avatarUrl}}" class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"></image>
+    <text class="userinfo-nickname">{{ userInfo.nickName }}</text>
+  </view>
   <view class="asset">
-    <view class='item' bindtap='goAsset'>
+    <view class='item' bindtap='goCoupon'>
       <view>{{balance}}</view>
-      <view>余额</view>
+      <view>优惠券</view>
     </view>
     <view class='item right' bindtap='goAsset'>
       <view>{{freeze}}</view>
-      <view>冻结</view>
+      <view>余额</view>
     </view>
     <view class='item right' bindtap='goScore'>
       <view>{{score}}</view>
@@ -18,8 +18,8 @@
     </view>
   </view>
   <view style="height:10rpx;background: #eee;width:100%;"></view>
-  <view class="my-item">
-    <navigator url="/pages/order-list/index" hover-class="navigator-hover">我的订单</navigator>
+  <view class="my-item-no-arrow">
+    我的订单
   </view>
   <view class='order-shortcut'>
     <view class='item' bindtap='goOrder' data-type="0">
@@ -35,77 +35,35 @@
       <view class='text'>待收货</view>
     </view>
     <view class='item' bindtap='goOrder' data-type="3">
-      <image class="icon" src="/images/order/pj.png" background-size="cover"></image>
-      <view class='text'>待评价</view>
-    </view>
-    <view class='item' bindtap='goOrder' data-type="99">
       <image class="icon" src="/images/order/shouhou.png" background-size="cover"></image>
       <view class='text'>退款/售后</view>
     </view>
-  </view>
-
-  <block wx:if="{{vipLevel > 0}}">
-  <view style="height:10rpx;background: #eee;width:100%;"></view>
-  <view class="my-item" wx:if="{{!apiUserInfoMap.base.isSeller}}">
-    <navigator url="/pages/fx/apply-status" hover-class="navigator-hover">成为分销商</navigator>
-  </view>
-  <view class="my-item" wx:if="{{apiUserInfoMap.base.isSeller}}">
-    <navigator url="/pages/fx/apply-status" hover-class="navigator-hover">分销中心</navigator>
-  </view>
-  <view class="my-item" wx:if="{{apiUserInfoMap.base.isSeller}}">
-    <navigator url="/pages/fx/members" hover-class="navigator-hover">我的团队</navigator>
-  </view>
-  <view class="my-item" wx:if="{{apiUserInfoMap.base.isSeller}}">
-    <navigator url="/pages/fx/commisionLog" hover-class="navigator-hover">返佣明细</navigator>
-  </view>
-  </block>
-
-  <block wx:if="{{vipLevel > 0}}">
-    <view style="height:10rpx;background: #eee;width:100%;"></view>
-    <view class="my-item">
-      <navigator url="/pages/invoice/apply" hover-class="navigator-hover">申请开票</navigator>
+    <view class='item' bindtap='goOrder' data-type="4">
+      <image class="icon" src="/images/order/pj.png" background-size="cover"></image>
+      <view class='text'>全部订单</view>
     </view>
-    <view class="my-item">
-      <navigator url="/pages/invoice/list" hover-class="navigator-hover">开票记录</navigator>
-    </view>
-  </block>
+
+  </view>
 
   <view style="height:10rpx;background: #eee;width:100%;"></view>
-  <view class="my-item" wx:if="{{vipLevel > 0}}">
-    <navigator url="/pages/maidan/index" hover-class="navigator-hover">优惠买单</navigator>
-  </view>
   <view class="my-item">
-    <navigator url="/pages/asset/index" hover-class="navigator-hover">资金明细</navigator>
+    <navigator url="/pages/ping-order-list/index" hover-class="navigator-hover">拼团订单</navigator>
   </view>
-  <view class="my-item">
-    <navigator url="/pages/sign/index" hover-class="navigator-hover">每日签到</navigator>
-  </view>
-  <view class="my-item">
-    <navigator url="/pages/score-excharge/index" hover-class="navigator-hover">积分兑换</navigator>
-  </view>  
   <view class="my-item">
     <navigator url="/pages/select-address/index" hover-class="navigator-hover">收货地址</navigator>
   </view>
   <view class="my-item">
-    <navigator url="/pages/coupons/index" hover-class="navigator-hover">领券中心</navigator>
+    <navigator  hover-class="navigator-hover" bindtap="contactUs">客服电话</navigator>
+  </view>
+  <view class="my-item">
+    <navigator  hover-class="navigator-hover" bindtap="aboutUs">关于我们</navigator>
   </view>
   <view wx:if="{{userMobile}}" class="my-item" style="border:none;padding-right:150rpx;width:auto;">
     {{userMobile}}
   </view>
-  <view style="height:20rpx;background: #eee;width:100%;"></view>
-  <view class="about" bindtap="aboutUs">
-    关于我们
-  </view>
 
-  <view style="height:20rpx;background: #eee;width:100%;"></view>
-  <view wx:if="{{!userMobile}}" class="bind-phone-number">
-    <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">绑定手机号码</button>
-  </view>
-  <view class="my-item to-authorize">
-    <button type="warn" bindtap="relogin">重新授权登录</button>
-  </view>
-  
-  <view style="height:20rpx;background: #eee;width:100%;"></view>
-  <view class="version">Powered by EastWorld v {{version}}</view>
-  <view style="height:20rpx;background: #eee;width:100%;"></view>
+
+
+  <view class="version">邻邻柒科技提供支持</view>
+
 </view>

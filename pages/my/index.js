@@ -29,8 +29,24 @@ Page({
   aboutUs : function () {
     wx.showModal({
       title: '关于我们',
-      content: '本系统基于开源小程序商城系统 https://github.com/EastWorld/wechat-app-mall 搭建，祝大家使用愉快！',
+      content: '欢迎使用本系统，快速搭建商城小程序，请联系我们。微信：qqq2830123',
       showCancel:false
+    })
+  },
+  contactUs: function () {
+    wx.showModal({
+      title: '联系我们',
+      content: '客服电话17764507394',
+      confirmText: '拨打',
+      success(res) {
+        if (res.confirm) {
+          wx.makePhoneCall({
+            phoneNumber: '17764507394'
+          })
+        } else if (res.cancel) {
+        }
+      }
+      
     })
   },
   getPhoneNumber: function(e) {
@@ -100,6 +116,11 @@ Page({
   goAsset: function () {
     wx.navigateTo({
       url: "/pages/asset/index"
+    })
+  },
+  goCoupon: function () {
+    wx.navigateTo({
+      url: "/pages/coupon-list/index"
     })
   },
   goScore: function () {
