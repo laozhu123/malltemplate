@@ -65,10 +65,10 @@ Page({
 
   },
   bindGetUserInfo: function(e) {
-    console.log('bindGetUserInfo')
     if (!e.detail.userInfo) {
       return;
     }
+    console.log(e.detail.userInfo)
     if (app.globalData.isConnected) {
       wx.setStorageSync('userInfo', e.detail.userInfo)
       this.login();
@@ -100,12 +100,6 @@ Page({
     wx.login({
       success: function(res) {
         WXAPI.login(res.code).then(function(res) {
-          if (res.code == 10000) {
-            // 去注册
-            that.registerUser();
-            return;
-          }
-          console.log(res)
           if (res.code != 0) {
             // 登录错误
             wx.hideLoading();
@@ -117,39 +111,10 @@ Page({
             return;
           }
           wx.setStorageSync('token', res.data.token)
-          wx.setStorageSync('uid', res.data.uid)
+          wx.setStorageSync('uid', res.data.union_id)
           // 回到原来的地方放
           app.navigateToLogin = false
           wx.navigateBack();
-        })
-      }
-    })
-  },
-  registerUser: function() {
-    let that = this;
-    wx.login({
-      success: function(res) {
-        let code = res.code; // 微信登录接口返回的 code 参数，下面注册接口需要用到
-        wx.getUserInfo({
-          success: function(res) {
-            let iv = res.iv;
-            let encryptedData = res.encryptedData;
-            let referrer = '' // 推荐人
-            let referrer_storge = wx.getStorageSync('referrer');
-            if (referrer_storge) {
-              referrer = referrer_storge;
-            }
-            // 下面开始调用注册接口
-            WXAPI.register( {
-              code: code,
-              encryptedData: encryptedData,
-              iv: iv,
-              referrer: referrer
-            }).then(function(res) {
-              wx.hideLoading();
-              that.login();
-            })
-          }
         })
       }
     })

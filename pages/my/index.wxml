@@ -5,11 +5,11 @@
   </view>
   <view class="asset">
     <view class='item' bindtap='goCoupon'>
-      <view>{{balance}}</view>
+      <view>{{coupon}}</view>
       <view>优惠券</view>
     </view>
     <view class='item right' bindtap='goAsset'>
-      <view>{{freeze}}</view>
+      <view>{{balance}}</view>
       <view>余额</view>
     </view>
     <view class='item right' bindtap='goScore'>
@@ -64,6 +64,6 @@
 
 
 
-  <view class="version">邻邻柒科技提供支持</view>
+  <view class="version">邻邻柒科技提供支持 v{{ version }}</view>
 
 </view>

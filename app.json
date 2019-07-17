@@ -15,7 +15,9 @@
     "pages/asset/index",
     "pages/score/index",
     "pages/recharge/index",
-    "pages/withdraw/index"
+    "pages/withdraw/index",
+    "pages/notice/show",
+    "pages/coupons/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

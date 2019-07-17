@@ -4,7 +4,7 @@ const WXAPI = require('../../wxapi/main')
 Page({
 	data: {
     balance:0.00,
-    freeze:0,
+    coupon:10,
     score:0,
     score_sign_continuous:0
   },
@@ -19,8 +19,7 @@ Page({
     } else {
       that.setData({
         userInfo: userInfo,
-        version: CONFIG.version,
-        vipLevel: app.globalData.vipLevel
+        version: CONFIG.version
       })
     }
     this.getUserApiInfo();
@@ -84,6 +83,8 @@ Page({
       }
     })
   },
+
+  // 获取个人信息
   getUserApiInfo: function () {
     var that = this;
     WXAPI.userDetail(wx.getStorageSync('token')).then(function (res) {
@@ -97,22 +98,23 @@ Page({
       }
     })
   },
+  // 获取积分、余额、优惠券信息
   getUserAmount: function () {
     var that = this;
     WXAPI.userAmount(wx.getStorageSync('token')).then(function (res) {
       if (res.code == 0) {
         that.setData({
+          coupon: res.data.coupon,
           balance: res.data.balance.toFixed(2),
-          freeze: res.data.freeze.toFixed(2),
           score: res.data.score
         });
       }
     })
   },
-  relogin:function(){
-    app.navigateToLogin = false;
-    app.goLoginPageTimeOut()
-  },
+  // relogin:function(){
+  //   app.navigateToLogin = false;
+  //   app.goLoginPageTimeOut()
+  // },
   goAsset: function () {
     wx.navigateTo({
       url: "/pages/asset/index"
